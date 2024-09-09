@@ -145,7 +145,9 @@
         //trenger vi en oversikt over Spillbrettplasseringer. Disse kan vi lagre i en array, siden vi fra
         //starten av koden så at spillbrettet kan tenkes på som indexer i en array.
         //Vi lager klar en oversikt, en array, med 9 tomme plasseringer vi senere kan fylle med spillervalg.
-        var spillerBrikker = ["","","","","","","","",""];
+        var spillerBrikker = ["","","",
+                              "","","",
+                              "","",""];
 
         //Videre trenger vi å registrere når en spiller klikker på en rute i spillbrettet.
         //Når en spiller klikker på en rute, skal vi få noe til å skje i koden, derfor kaller vi
@@ -216,6 +218,11 @@
                     //Når brikken er plassert på spillerbrettet, må vi sjekke om den - og brikkene rundt - 
                     //utgjør en vinnerkombinasjon. Denne funksjonaliteten ligger i funksjonen sjekkVinner(),
                     //siden dette er et litt større sett med handlinger og kan gi noen ulike utfall.
+                   
+                    // Venter 1 sekund før den sjekker, men den pauser ikke programmet, så mens denne venter
+                    // og du plasserer en ny brikke i spillet så vil ikke den sjekke et vinn på den nye, men den gamle.
+                    // Og derfor vil "Du har vunnet" boksen dukke opp mindre enn et sekund i mange tilfeller
+                    //const myTimeout = setTimeout(sjekkVinner, 1000);
                     sjekkVinner();
 
                 //Men, hvis cellen ikke er ledig...
@@ -251,10 +258,11 @@
             //Vi må sjekke etter vinner for hver brikke som plasseres på brettet.
             // Dette gjør vi ved å gå gjennom alle vinnerkombinasjonene, og
             //sjekke om brikkene på spillbrettet er like ved indexene til vinnerkombinasjonene:
-            for(var combination = 0; combination <= 7; combination++) {
+            for(var combination = 0; combination <= 7; combination++)
+            {
                 var vinnerKomboPlass1 = winningCombos[combination][0]; //Henter ut plassering av vinnerkombinasjonens rad 1, eksempel winningCombos[0][0] første runde, som inneholder verdien 0.
                 var vinnerKomboPlass2 = winningCombos[combination][1];
-                var vinnerKomboPlass3 = winningCombos[combination][2]
+                var vinnerKomboPlass3 = winningCombos[combination][2];
 
                 var brikke1 = spillerBrikker[vinnerKomboPlass1]; //Henter ut verdien (spillmerket) på indexen til første vinnerkombinasjonsplass fra spillerBrikker, eksempel spillerBrikker[0] første runde.
                 var brikke2 = spillerBrikker[vinnerKomboPlass2];
@@ -282,6 +290,11 @@
                 document.getElementById("newgame").style.display = "block";
                 //Sett spillstatus til false, slik at ingen spillere får plassere
                 //flere brikker på brettet - dette løses med sjekken i funksjonen spill()
+
+                // Farger vinner brikker gull
+                document.getElementById("celle" + vinnerKomboPlass1).style.color = "#FFD700";
+                document.getElementById("celle" + vinnerKomboPlass2).style.color = "#FFD700";
+                document.getElementById("celle" + vinnerKomboPlass3).style.color = "#FFD700";
 
                 // Fikser bakgrunnsfarge for vinner
                 document.getElementById("playerturn").style.backgroundColor = "#FFD700";
