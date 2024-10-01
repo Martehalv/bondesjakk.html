@@ -219,11 +219,11 @@
                     //utgjør en vinnerkombinasjon. Denne funksjonaliteten ligger i funksjonen sjekkVinner(),
                     //siden dette er et litt større sett med handlinger og kan gi noen ulike utfall.
                    
-                    // Venter 1 sekund før den sjekker, men den pauser ikke programmet, så mens denne venter
-                    // og du plasserer en ny brikke i spillet så vil ikke den sjekke et vinn på den nye, men den gamle.
-                    // Og derfor vil "Du har vunnet" boksen dukke opp mindre enn et sekund i mange tilfeller
-                    //const myTimeout = setTimeout(sjekkVinner, 1000);
-                    sjekkVinner();
+                
+                    setTimeout(function() {
+                        sjekkVinner();
+                    }, 1000);
+                    
 
                 //Men, hvis cellen ikke er ledig...
                 } else {
